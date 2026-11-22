@@ -141,6 +141,10 @@ source .venv/bin/activate  # Windows: .venv\Scripts\activate
 pip install -e .
 ```
 
+Requires Python 3.10 or newer. The server is built on the `mcp` SDK 2.x (`mcp>=2,<3`) and `pip` installs the right version for you.
+
+> **Upgrading from an older install?** Earlier releases used `mcp` 1.x. In your existing virtualenv run `pip install -U -e .` (or re-run the install above) so `mcp` moves to 2.x, then restart Claude Desktop. Your stored cookie and Claude Desktop config do not change.
+
 #### Step 2: Authenticate
 
 **Option A: Auto-extract from browser (easiest)**
@@ -357,8 +361,10 @@ This means:
 pip install -e ".[dev]"
 pytest tests/ -v
 mypy src/
-ruff check src/
+ruff check src/ tests/
 ```
+
+Tool handlers are exercised both directly (`tests/test_server_functional.py`) and through the real MCP server with an in-memory client (`tests/test_server_protocol.py`).
 
 ## Licence
 
