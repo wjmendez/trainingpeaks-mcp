@@ -40,9 +40,10 @@ MVP - Complete & Production Ready
 ### Server (MVP)
 - [x] SERVER-01 - MCP server setup
 - [x] SERVER-02 - Python 3.14 async fix
+- [x] SERVER-03 - Migrate to mcp SDK 2.x (`Server(on_list_tools=..., on_call_tool=...)`, `Tool.input_schema`)
 
 ### Testing & Docs (MVP)
-- [x] TEST-01 - Integration test suite (338 tests passing)
+- [x] TEST-01 - Integration test suite (341 tests passing)
 - [x] TEST-02 - Tests for fitness/peaks tools
 - [x] CI-01 - GitHub Actions workflow (Python 3.10-3.14)
 - [x] DOCS-01 - README with SEO optimization (trainingpeaks + training-peaks tags)
