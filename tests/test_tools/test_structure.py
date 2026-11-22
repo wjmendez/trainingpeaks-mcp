@@ -3,6 +3,7 @@
 import json
 
 import pytest
+from pydantic import ValidationError
 
 from tp_mcp.tools.structure import (
     SimpleRepetitionBlock,
@@ -184,24 +185,24 @@ class TestValidation:
     """Test structure validation."""
 
     def test_missing_duration_raises(self):
-        with pytest.raises(Exception):
+        with pytest.raises(ValidationError):
             SimpleStep(name="Bad", duration_seconds=0, intensity_min=50, intensity_max=60, intensityClass="active")
 
     def test_empty_steps_raises(self):
-        with pytest.raises(Exception):
+        with pytest.raises(ValidationError):
             SimpleWorkoutStructure(steps=[])
 
     def test_invalid_intensity_class(self):
-        with pytest.raises(Exception):
+        with pytest.raises(ValidationError):
             SimpleStep(name="Bad", duration_seconds=300, intensity_min=50, intensity_max=60, intensityClass="invalid")
 
     def test_intensity_min_gt_max(self):
-        with pytest.raises(Exception):
+        with pytest.raises(ValidationError):
             SimpleStep(name="Bad", duration_seconds=300, intensity_min=100, intensity_max=50, intensityClass="active")
 
     def test_invalid_primary_metric(self):
         step = SimpleStep(name="OK", duration_seconds=300, intensity_min=50, intensity_max=60, intensityClass="active")
-        with pytest.raises(Exception):
+        with pytest.raises(ValidationError):
             SimpleWorkoutStructure(primaryIntensityMetric="invalidMetric", steps=[step])
 
 
